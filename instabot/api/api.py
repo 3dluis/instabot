@@ -1864,11 +1864,27 @@ class API(object):
         data = json.dumps(
             {
                 "visual_message_return_type": "unseen",
+                "direction": "older",
                 "persistentBadging": "True",
                 "limit": "0",
             }
         )
         return self.send_request("direct_v2/inbox/", data)
+
+    def send_seen_item(self, thread_id, item_id):
+        data = {
+            "_uuid": self.uuid,
+            '_uid': self.user_id,
+            '_csrftoken': self.token
+        }
+        return self.send_request(
+            'direct_v2/threads/{}/items/{}/seen/'.format(thread_id, item_id), json.dumps(data)
+        )
+
+    def thread_leave(self, thread_id):
+        return self.send_request(
+            'direct_v2/threads/{}/leave/'.format(thread_id), json.dumps({})
+        )
 
     def get_presence(self):
         return self.send_request("direct_v2/get_presence/")

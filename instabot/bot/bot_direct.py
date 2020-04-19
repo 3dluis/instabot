@@ -234,3 +234,20 @@ def approve_pending_thread_requests(self):
                 self.logger.info("Approved thread: {}".format(thread_id))
             else:
                 self.logger.error("Could not approve thread {}".format(thread_id))
+
+
+def send_seen_item(self, thread_id, item_id):
+    self.api.send_seen_item(thread_id=thread_id, item_id=item_id)
+    if self.api.last_response.status_code == 200:
+        self.logger.info("Seen thread: {} -> Item {}".format(thread_id, item_id))
+    else:
+        self.logger.error("Could not approve thread {} -> Item {}".format(thread_id, item_id))
+    return True
+
+
+def thread_leave(self, thread_id):
+    self.api.thread_leave(thread_id=thread_id)
+    if self.api.last_response.status_code == 200:
+        self.logger.info("Leave thread: {}".format(thread_id))
+    else:
+        self.logger.error("Could not leave thread {}".format(thread_id))

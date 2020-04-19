@@ -38,7 +38,7 @@ from .bot_direct import (
     send_messages,
     send_photo,
     send_profile,
-)
+    send_seen_item, thread_leave)
 from .bot_filter import check_media, check_not_bot, check_user, filter_medias
 from .bot_follow import (
     approve_pending_follow_requests,
@@ -981,3 +981,9 @@ class Bot(object):
     # stats
     def save_user_stats(self, username, path=""):
         return save_user_stats(self, username, path=path)
+
+    def send_seen_item(self, thread_id, item_id):
+        return send_seen_item(self, thread_id, item_id)
+
+    def leave(self, thread_id):
+        return thread_leave(self, thread_id)
